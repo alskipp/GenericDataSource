@@ -74,6 +74,8 @@ final class DetailCell: UITableViewCell, Cell {
 }
 ```
 
+![screenshot] (http://alskipp.github.io/GenericDataSource/img/tableView1.png)
+
 * * *
 
 A data structure that represents several types of `TableViewCell` can be written using an enum:
