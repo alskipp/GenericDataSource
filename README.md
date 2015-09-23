@@ -106,6 +106,7 @@ enum TableSectionItem: SectionItem {
 
 A full example of using a dataSource with multiple cell types is demonstrated in the Xcode project.
 
+![screenshot] (http://alskipp.github.io/GenericDataSource/img/tableView2.png)
 
 …The Bad & The Ugly
 ---
