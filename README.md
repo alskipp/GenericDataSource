@@ -26,21 +26,19 @@ struct CellInfo: SectionItem {
 class ViewController: UITableViewController {
     let person = Person(name: "Fred Smith", age: 20, height: 176, weight: 65)
     
-    let tableViewDataSource: TableViewDataSource<TableSection<CellInfo>> = TableViewDataSource()
+    lazy var tableViewDataSource: TableViewDataSource<TableSection<TableSectionItem>> = {
+        return TableViewDataSource(sections: [
+            TableSection(title: "Details", items: [
+                CellInfo(viewData: DetailCell.ViewData(title: "Name:", detail: person.name)),
+                CellInfo(viewData: DetailCell.ViewData(title: "Age:", detail: person.age)),
+                CellInfo(viewData: DetailCell.ViewData(title: "Height:", detail: person.height)),
+                CellInfo(viewData: DetailCell.ViewData(title: "Weight:", detail: person.weight))
+            ])
+        ])
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let sections: [TableSection<CellInfo>] = [
-            TableSection(title: "Details", items: [
-                CellInfo(viewData: DetailCell.ViewData(title: "Name:", detail: person.name)),
-                CellInfo(viewData: DetailCell.ViewData(title: "Age:", detail: person.age.description)),
-                CellInfo(viewData: DetailCell.ViewData(title: "Height:", detail: person.height.description)),
-                CellInfo(viewData: DetailCell.ViewData(title: "Weight:", detail: person.weight.description))
-            ])
-        ]
-        
-        tableViewDataSource.sections = sections
         tableView.dataSource = tableViewDataSource
     }
 }
@@ -58,9 +56,9 @@ final class DetailCell: UITableViewCell, Cell {
         let title: String
         let detail: String
         
-        init(title: String = "", detail: String = "") {
+        init(title: String = "", detail: CustomStringConvertible = "") {
             self.title = title
-            self.detail = detail
+            self.detail = detail.description
         }
     }
     
