@@ -17,9 +17,9 @@ final class DetailCell: UITableViewCell, Cell {
         let title: String
         let detail: String
         
-        init(title: String = "", detail: String = "") {
+        init(title: String = "", detail: CustomStringConvertible = "") {
             self.title = title
-            self.detail = detail
+            self.detail = detail.description
         }
     }
     

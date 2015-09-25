@@ -44,7 +44,9 @@ protocol ViewDataProvider {}
 
 
 class TableViewDataSource<A: TableViewDataSection> : NSObject, UITableViewDataSource {
-    var sections: [A] = []
+    var sections: [A]
+    
+    init(sections: [A]) { self.sections = sections }
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let rowInfo = sections[indexPath.section].items[indexPath.row]

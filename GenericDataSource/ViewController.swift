@@ -33,28 +33,34 @@ enum TableSectionItem: SectionItem {
 enum CellID: String { case HeadlineCell, DetailCell, ColorCell }
 
 class ViewController: UITableViewController {
-    let person = Person(name: "Fred Smith", age: 20, height: 176, weight: 65, eyeColor: .blueColor(), hairColor: .brownColor())
+    let person = Person(
+        name: "Fred Smith",
+        birthDate: DOB(year: 1900, month: 9, day: 12),
+        cash: Cash(amount: 1500, currency: .GBP),
+        height: Height(value: 176, unit: .cm),
+        weight: Weight(value: 65, unit: .kg),
+        eyeColor: .blueColor(),
+        hairColor: .brownColor()
+    )
     
-    let tableViewDataSource: TableViewDataSource<TableSection<TableSectionItem>> = TableViewDataSource()
+    lazy var tableViewDataSource: TableViewDataSource<TableSection<TableSectionItem>> = {
+        return TableViewDataSource(sections: [
+            TableSection(title: .None, items: [
+                .Header(viewData: HeadlineCell.ViewData(title: self.person.name))
+            ]),
+            TableSection(title: "Details", items: [
+                .Detail(viewData: DetailCell.ViewData(title: "Date of Birth:", detail: self.person.birthDate)),
+                .Detail(viewData: DetailCell.ViewData(title: "Cash:", detail: self.person.cash)),
+                .Detail(viewData: DetailCell.ViewData(title: "Weight:", detail: self.person.weight)),
+                .Detail(viewData: DetailCell.ViewData(title: "Height:", detail: self.person.height)),
+                .Color(viewData: ColorCell.ViewData(title: "Eye Color:", color: self.person.eyeColor)),
+                .Color(viewData: ColorCell.ViewData(title: "Hair Color:", color: self.person.hairColor))
+                ])
+            ])
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let sections: [TableSection<TableSectionItem>] = [
-            TableSection(title: .None, items: [
-                .Header(viewData: HeadlineCell.ViewData(title: person.name))
-                ]),
-            TableSection(title: "Details", items: [
-                .Detail(viewData: DetailCell.ViewData(title: "Age:", detail: person.age.description)),
-                .Detail(viewData: DetailCell.ViewData(title: "Weight:", detail: person.weight.description)),
-                .Detail(viewData: DetailCell.ViewData(title: "Height:", detail: person.height.description)),
-                .Color(viewData: ColorCell.ViewData(title: "Eye Color:", color: person.eyeColor)),
-                .Color(viewData: ColorCell.ViewData(title: "Hair Color:", color: person.hairColor))
-                ])
-        ]
-        
-        tableViewDataSource.sections = sections
         tableView.dataSource = tableViewDataSource
     }
 }
-

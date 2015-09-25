@@ -10,9 +10,10 @@ import UIKit
 
 struct Person {
     let name: String
-    let age: Int
-    let height: Int
-    let weight: Int
+    let birthDate: DOB
+    let cash: Cash
+    let height: Height
+    let weight: Weight
     let eyeColor: UIColor
     let hairColor: UIColor
 }
