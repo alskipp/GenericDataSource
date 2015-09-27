@@ -14,8 +14,7 @@ protocol TableViewDataSection {
     var items: [Item] { get }
 }
 
-struct TableSection<A: SectionItem>: TableViewDataSection  {
-    typealias Item = A
+struct TableSection<Item: SectionItem>: TableViewDataSection  {
     let title: String?
     let items: [Item]
 }
