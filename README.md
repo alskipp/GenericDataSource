@@ -10,7 +10,7 @@ func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> In
 func numberOfSectionsInTableView(tableView: UITableView) -> Int
 ```
 
-The idea is to avoid reimplementing the above methods for every `UITableViewController` and to use a generic `TableViewDataSource` instead. The requirement is to declare a data structure that represents the data for each type of cell in your `TableView`. A simple example is shown below:
+The idea is to avoid reimplementing the above methods for every `UITableViewController` and to use a generic `TableViewDataSource` instead. A typical use case is a ‘details’ view where multiple properties of a single value are displayed in a tableView (potentially using several kinds of tableViewCell). To support multiple types of cell, the requirement is to declare a data structure that represents the data for each type of cell in your `TableView`. A simple example is shown below:
 
 The Good…
 ---
