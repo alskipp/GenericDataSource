@@ -26,7 +26,7 @@ struct CellInfo: SectionItem {
 class ViewController: UITableViewController {
     let person = Person(name: "Fred Smith", age: 20, height: 176, weight: 65)
     
-    lazy var tableViewDataSource: TableViewDataSource<TableSection<TableSectionItem>> = {
+    lazy var tableViewDataSource: TableViewDataSource<TableSection<CellInfo>> = {
         return TableViewDataSource(sections: [
             TableSection(title: "Details", items: [
                 CellInfo(viewData: DetailCell.ViewData(title: "Name:", detail: person.name)),
