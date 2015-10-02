@@ -8,6 +8,10 @@
 
 import UIKit
 
+/*
+`TableViewDataSection` has an Optional title and an Array of items conforming to `SectionItem`.
+Each `SectionItem` contains the data for a row in the TableView.
+*/
 protocol TableViewDataSection {
     typealias Item: SectionItem
     var title: String? { get }
@@ -20,7 +24,8 @@ struct TableSection<Item: SectionItem>: TableViewDataSection  {
 }
 
 /*
-viewData `ViewDataProvider` is a generic value that is used to configure the tableViewCell
+`SectionItem` represents a single row in the DataSource.
+`ViewDataProvider` is a value that contains all the data required to configure the TableViewCell.
 */
 protocol SectionItem {
     var cellID: String { get }
@@ -28,16 +33,17 @@ protocol SectionItem {
 }
 
 /*
-TableViewCells must conform to the `Cell` protocol
-They must have a `viewData` var which conforms to `ViewDataProvider`
+TableViewCells must conform to the `Cell` protocol to allow the `TableViewDataSource` 
+to pass `viewData` values from each `SectionItem` to each TableViewCell.
 */
 protocol Cell {
     var viewData: ViewDataProvider { get set }
 }
 
 /*
-`ViewDataProvider` is a generic value that is used to configure the tableViewCell
-Currently the tableViewCell must force coerce `ViewDataProvider` to the concrete type needed
+TableViewCells use `ViewDataProvider` values to configure their appearance.
+Currently the tableViewCell must force coerce `ViewDataProvider` to the concrete type needed.
+Take a look at `DetailCell` for an example.
 */
 protocol ViewDataProvider {}
 
